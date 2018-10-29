@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-const Todos = (props) => {  //STEP 6 - creating stateless component & inheriting props 
+const Todos = (props) => {  
 
-    let todos = props.todos.map(todo => (//STEP 8 - mapping through props 
+    let todos = props.todos.map(todo => ( 
         <li key={todo._id}> 
             {todo.description}
-            <button onClick={() => props.deleteTask(todo._id)}>Delete</button> {/*STEP 10*/}
+            <button onClick={() => props.deleteTask(todo._id)}>Delete</button> 
         </li>
     )) 
 

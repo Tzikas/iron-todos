@@ -2,37 +2,47 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import axios from 'axios'  //STEP 3  
+import axios from 'axios'  
 import {serverURL} from './config'
 import Todos from './Todos.js'
+import { //STEP 14 - Import actions 
+  signUp,
+  logIn,
+  logOut,
+  loggedIn
+} from './authActions'
+import { 
+  getTasks,
+  postTask,
+  deleteTask,
+  editTask
+} from './todoActions'
+
+
 
 class Home extends Component {
-    state = {  //STEP 2 - show state & this is a stateful component 
+    state = {  
           todos: []
     }
 
 
-    async componentDidMount(){ //STEP 1 - describe lifycycle events and class 
+    async componentDidMount(){  
         this.getTasks() 
     }
-
-
-    getTasks = async () => { //STEP 4 - function appears in state         
-        let getData = await axios.get(`${serverURL}/api/tasks`)       
-        this.setState({todos:getData.data}) //STEP 7 - setState and passing props to 
+    getTasks = async() => {
+        let todos =  await getTasks();
+        console.log( ' todos ',  todos )
+        this.setState({todos:todos})      
     }
-
-    deleteTask = async (id) => { //STEP 9 
-        let deleteData = await axios.post(`${serverURL}/api/tasks/delete/${id}`)   
-        this.setState({todos: this.state.todos.filter(t => t._id !== id)}) //STEP 11 
+    deleteTask = async (id) => {
+        let t = await deleteTask(id)
+        this.setState({todos: this.state.todos.filter(t => t._id !== id)})
     }
-
 
     render() {
         return (
             <div className="App">
-                <h1>Todos</h1>                
-                {/*STEP 5 - passing state to props & importing components*/}
+                <h1>Todos</h1>                                
                 <Todos  
                     color="cornflowerblue"
                     todos={this.state.todos}
@@ -44,3 +54,16 @@ class Home extends Component {
 }
 
 export default Home;
+
+
+
+Object.assign(window, { //Lets actions be called from console 
+  getTasks,
+  postTask,
+  logIn,
+  signUp,
+  logOut,
+  loggedIn,
+  deleteTask,
+  editTask,
+}); 
