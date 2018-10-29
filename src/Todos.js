@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 const Todos = (props) => {  //STEP 6 - creating stateless component & inheriting props 
 
     let todos = props.todos.map(todo => (//STEP 8 - mapping through props 
-        <li key={todo._id}> {todo.description}</li>
+        <li key={todo._id}> 
+            {todo.description}
+            <button onClick={() => props.deleteTask(todo._id)}>Delete</button> {/*STEP 10*/}
+        </li>
     )) 
 
     return (
@@ -13,6 +16,7 @@ const Todos = (props) => {  //STEP 6 - creating stateless component & inheriting
             <ul>
                 {todos}
             </ul>
+            
         </div>
     )
 }

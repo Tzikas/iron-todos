@@ -18,8 +18,13 @@ class Home extends Component {
 
 
     getTasks = async () => { //STEP 4 - function appears in state         
-        let getData = await axios.get(`${serverURL}/api/tasks`)         
+        let getData = await axios.get(`${serverURL}/api/tasks`)       
         this.setState({todos:getData.data}) //STEP 7 - setState and passing props to 
+    }
+
+    deleteTask = async (id) => { //STEP 9 
+        let deleteData = await axios.post(`${serverURL}/api/tasks/delete/${id}`)   
+        this.setState({todos: this.state.todos.filter(t => t._id !== id)}) //STEP 11 
     }
 
 
@@ -31,6 +36,7 @@ class Home extends Component {
                 <Todos  
                     color="cornflowerblue"
                     todos={this.state.todos}
+                    deleteTask={this.deleteTask}
                 /> 
             </div>
         );
