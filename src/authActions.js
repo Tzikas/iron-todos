@@ -1,4 +1,4 @@
-import axios from 'axios' //STEP 12 - write user autentication actions 
+import axios from 'axios' 
 import {serverURL} from './config'
 axios.defaults.withCredentials = true;  // :-/
 
